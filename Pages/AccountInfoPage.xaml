@@ -11,9 +11,10 @@
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"/>
             <ColumnDefinition Width="0.3*"/>
-            <ColumnDefinition Width="0.4*"/>
-            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
@@ -26,26 +27,67 @@
         </Grid.RowDefinitions>
         <Image Grid.Row="1" Grid.RowSpan="2" Source="/Resources/UserIcon.png"/>
         <TextBlock Text="Контактная информация" Grid.Column="1" VerticalAlignment="Bottom" FontSize="30"/>
-        <TextBlock Text="Паспортные данные" Grid.Column="2" VerticalAlignment="Bottom" FontSize="30"/>
-        <StackPanel Grid.Row="1" Grid.Column="1" Margin="20,0,70,20" VerticalAlignment="Bottom">
+        <TextBlock Text="Паспортные данные" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontSize="30"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="20,0,0,20" VerticalAlignment="Bottom">
             <TextBlock Text="Фамилия" FontSize="15"/>
             <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxName" Width="300" HorizontalAlignment="Left"/>
         </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="1" Margin="20,0,70,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="20,0,0,20" VerticalAlignment="Bottom">
             <TextBlock Text="Имя" FontSize="15"/>
             <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxSurname" Width="300" HorizontalAlignment="Left"/>
         </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="1" Margin="20,0,70,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="3" Grid.Column="1" Margin="20,0,0,20" VerticalAlignment="Bottom">
             <TextBlock Text="Отчество" FontSize="15"/>
             <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxPatronymic" Width="300" HorizontalAlignment="Left"/>
         </StackPanel>
-        <StackPanel Grid.Row="4" Grid.Column="1" Margin="20,0,70,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="4" Grid.Column="1" Margin="20,0,0,20" VerticalAlignment="Bottom">
             <TextBlock Text="Телефон" FontSize="15"/>
             <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxPhone" Width="300" HorizontalAlignment="Left"/>
         </StackPanel>
-        <StackPanel Grid.Row="5" Grid.Column="1" Margin="20,0,70,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="5" Grid.Column="1" Margin="20,0,0,20" VerticalAlignment="Bottom">
             <TextBlock Text="Почта" FontSize="15"/>
             <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxEmail" Width="300" HorizontalAlignment="Left"/>
         </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" Margin="20,0,0,20" VerticalAlignment="Bottom">
+            <TextBlock Text="Серия" FontSize="15"/>
+            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxSeries" Width="300" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2" Margin="20,0,0,20" VerticalAlignment="Bottom">
+            <TextBlock Text="Номер" FontSize="15"/>
+            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxNumber" Width="300" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="2" Margin="20,0,0,20" VerticalAlignment="Bottom">
+            <TextBlock Text="Дата выдачи" FontSize="15"/>
+            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxDateOfIssue" Width="300" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="2" Margin="20,0,0,20" VerticalAlignment="Bottom">
+            <TextBlock Text="Выдан" FontSize="15"/>
+            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxIssueOrg" Width="300" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="2" Margin="20,0,0,20" VerticalAlignment="Bottom">
+            <TextBlock Text="Дата рождения" FontSize="15"/>
+            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxDateOfBirth" Width="300" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="3" Margin="20,0,0,20" VerticalAlignment="Bottom">
+            <TextBlock Text="Город" FontSize="15"/>
+            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxCity" Width="300" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="3" Margin="20,0,0,20" VerticalAlignment="Bottom">
+            <TextBlock Text="Улица" FontSize="15"/>
+            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxStreet" Width="300" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="3" Margin="20,0,0,20" VerticalAlignment="Bottom">
+            <TextBlock Text="Дом" FontSize="15"/>
+            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxHouse" Width="300" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="3" Margin="20,0,0,20" VerticalAlignment="Bottom">
+            <TextBlock Text="Строение" FontSize="15"/>
+            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxBuilding" Width="300" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="3" Margin="20,0,0,20" VerticalAlignment="Bottom">
+            <TextBlock Text="Квартира" FontSize="15"/>
+            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxApartment" Width="300" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <Button Grid.Column="3" Grid.Row="6" Height="40" Width="170" Content="Сохранить" Foreground="White" Background="DarkBlue" FontSize="20"/>
     </Grid>
 </Page>
