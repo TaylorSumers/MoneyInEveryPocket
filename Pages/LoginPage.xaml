@@ -10,7 +10,7 @@
 
     <Grid Background="White">
 
-        <Border Name="brdLogin" BorderBrush="LightGray" Background="White" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="600" Width="450">
+        <Border Name="brdMain" BorderBrush="LightGray" Background="White" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="600" Width="450">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" Direction="130" Color="DarkGray" Opacity="1" BlurRadius="30"/>
             </Border.Effect>
@@ -22,19 +22,19 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Авторизация" FontSize="50" HorizontalAlignment="Center" Foreground="DarkBlue" VerticalAlignment="Center"/>
-                <StackPanel Grid.Row="1" Margin="40,0">
-                    <TextBlock Text="Логин"/>
-                    <TextBox Height="50"/>
+                <StackPanel Grid.Row="1" Margin="40,0,40,20" VerticalAlignment="Bottom">
+                    <TextBlock Text="Почта" FontSize="15"/>
+                    <TextBox Height="50" FontSize="30" Name="tbxEmail"/>
                 </StackPanel>
-                <StackPanel Grid.Row="2" Margin="40,0">
-                    <TextBlock Text="Пароль"/>
-                    <PasswordBox Height="50"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Запомнить меня"/>
-                        <CheckBox/>
+                <StackPanel Grid.Row="2" Margin="40,20,40,0" VerticalAlignment="Top">
+                    <TextBlock Text="Пароль" FontSize="15"/>
+                    <PasswordBox Height="50" FontSize="30" Name="pbxPass"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10">
+                        <TextBlock Text="Запомнить меня" FontSize="15"/>
+                        <CheckBox Margin="5"/>
                     </StackPanel>
                 </StackPanel>
-                <Button Grid.Row="3" Content="Продолжить" Margin="50" Background="DarkBlue" Foreground="White"/>
+                <Button Name="btnEnter" Grid.Row="3" Content="Продолжить" Margin="50" Background="DarkBlue" Foreground="White" FontSize="20" Click="btnEnter_Click"/>
             </Grid>
 
         </Border>
