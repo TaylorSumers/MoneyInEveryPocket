@@ -16,6 +16,9 @@
             <Image Width="50" Source="Resources/Logo.png"/>
             <TextBlock VerticalAlignment="Center" Text="Деньги в каждый карман" FontStyle="Italic" FontSize="20" Foreground ="DarkBlue" Margin="5"/>
         </StackPanel>
+        <Button HorizontalAlignment="Right" Margin="10" Width="60" Background="Transparent" BorderBrush="Transparent">
+            <Image Source="Resources/UserIcon.png"/>
+        </Button>
         <Frame Grid.Row="1" Name="MainFrame" NavigationUIVisibility ="Hidden"/>
     </Grid>
 </Window>
