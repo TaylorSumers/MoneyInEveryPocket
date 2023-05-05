@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="AccountNumber" />
           </Key>
-          <Property Name="AccountNumber" Type="bigint" Nullable="false" />
+          <Property Name="AccountNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AccountUser" Type="int" Nullable="false" />
           <Property Name="AccountDateOpen" Type="date" Nullable="false" />
           <Property Name="AccountBalance" Type="decimal" Precision="10" Scale="2" Nullable="false" />
@@ -26,7 +26,7 @@
           <Key>
             <PropertyRef Name="AddressID" />
           </Key>
-          <Property Name="AddressID" Type="int" Nullable="false" />
+          <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AddressCity" Type="int" />
           <Property Name="AddressStreet" Type="int" Nullable="false" />
           <Property Name="AddressHouse" Type="varchar" MaxLength="5" Nullable="false" />
@@ -68,7 +68,7 @@
           <Key>
             <PropertyRef Name="OpID" />
           </Key>
-          <Property Name="OpID" Type="int" Nullable="false" />
+          <Property Name="OpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OpType" Type="int" Nullable="false" />
           <Property Name="OpDate" Type="date" Nullable="false" />
           <Property Name="OpAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
@@ -338,7 +338,7 @@
           <Key>
             <PropertyRef Name="AccountNumber" />
           </Key>
-          <Property Name="AccountNumber" Type="Int64" Nullable="false" />
+          <Property Name="AccountNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AccountUser" Type="Int32" Nullable="false" />
           <Property Name="AccountDateOpen" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="AccountBalance" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
@@ -360,7 +360,7 @@
           <Key>
             <PropertyRef Name="AddressID" />
           </Key>
-          <Property Name="AddressID" Type="Int32" Nullable="false" />
+          <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AddressCity" Type="Int32" />
           <Property Name="AddressStreet" Type="Int32" Nullable="false" />
           <Property Name="AddressHouse" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
@@ -408,7 +408,7 @@
           <Key>
             <PropertyRef Name="OpID" />
           </Key>
-          <Property Name="OpID" Type="Int32" Nullable="false" />
+          <Property Name="OpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OpType" Type="Int32" Nullable="false" />
           <Property Name="OpDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="OpAmount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />

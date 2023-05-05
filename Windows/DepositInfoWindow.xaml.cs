@@ -34,6 +34,7 @@ namespace MoneyInEveryPocket.Windows
                 AdditionSlider.IsEnabled = false;
                 AddValue.IsEnabled = false;
             }
+            SetAvailibleAccounts();
         }
 
         private void SumValue_TextChanged(object sender, TextChangedEventArgs e)
@@ -54,6 +55,94 @@ namespace MoneyInEveryPocket.Windows
 
                 tbResult.Text = result;
             }
+        }
+
+        private void SetAvailibleAccounts()
+        {
+            var accounts = CurrentUser.Account.Where(account => account.AccountType == 1 || account.AccountType == 2).ToList(); // Search credit or deposit accounts
+            if(accounts.Count() == 0) // If not founded, notice user and hide button for make deposit
+            {
+                tbError.Visibility = Visibility.Visible;
+                cbxAccount.IsEnabled = false;
+                btnMakeDeposit.Visibility = Visibility.Hidden;
+            }
+            else // If credit or deposit accounts exist, fill cbx
+            {
+                cbxAccount.ItemsSource = accounts;
+                TimeSlider.Minimum = currentDeposit.DepositMinTerm * 30;
+            }
+        }
+
+        private void cbxAccount_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(cbxAccount.SelectedItem != null)
+                tbBalance.DataContext = cbxAccount.SelectedItem;
+        }
+
+        private void btnMakeDeposit_Click(object sender, RoutedEventArgs e)
+        {
+            // Select account for withdraw money
+            var paymentAccount = cbxAccount.SelectedItem as Account;
+            if (paymentAccount == null)
+            {
+                MessageBox.Show("Выберите счёт списания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Select withdraw and new account balances
+            var paymentAccountBalance = paymentAccount.AccountBalance;
+            var newAccountBalance = Convert.ToInt32(SumValue.Text);
+
+            // Check conditions
+            if (newAccountBalance == 0)
+            {
+                MessageBox.Show("Нельзя открыть вклад с нулевым балансом", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if(newAccountBalance>paymentAccountBalance)
+            {
+                MessageBox.Show("Недостаточно средств на счёте списания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Decrease withdraw account balance
+            paymentAccount.AccountBalance = paymentAccountBalance - newAccountBalance;
+
+            // Save decrease operation to history
+            var withdrawOperation = new OperationHistory()
+            {
+                OpType = 1, // "Снятие"
+                OpDate = DateTime.Now.Date,
+                OpAmount = newAccountBalance,
+                OpAccount = paymentAccount.AccountNumber
+            };
+            cont.OperationHistory.Add(withdrawOperation);
+
+            // Create new deposit account
+            var newAccount = new Account()
+            {
+                AccountType = 3, // "Депозитный"
+                AccountBalance = newAccountBalance,
+                AccountUser = CurrentUser.UserID,
+                AccountDateOpen = DateTime.Now.Date
+            };
+            cont.Account.Add(newAccount);
+            cont.SaveChanges();
+
+            // Save add operation to history
+            var addOperation = new OperationHistory()
+            {
+                OpType = 2, // "Пополнение"
+                OpDate = DateTime.Now.Date,
+                OpAmount = newAccountBalance,
+                OpAccount = newAccount.AccountNumber
+            };
+            cont.OperationHistory.Add(addOperation);
+            cont.SaveChanges();
+
+            // Notice user that all ok
+            MessageBox.Show("Вклад оформлен", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+            Close();
         }
     }
 }

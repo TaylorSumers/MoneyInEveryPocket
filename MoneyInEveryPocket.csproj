@@ -66,17 +66,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Windows\DepositInfoWindow.xaml.cs">
-      <DependentUpon>DepositInfoWindow.xaml</DependentUpon>
-    </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DatabaseModel\Account.cs">
       <DependentUpon>BankModel.tt</DependentUpon>
     </Compile>
@@ -86,7 +75,6 @@
     <Compile Include="DatabaseModel\Address.cs">
       <DependentUpon>BankModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseModel\AppConnect.cs" />
     <Compile Include="DatabaseModel\BankModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -135,6 +123,18 @@
     <Compile Include="DatabaseModel\User.cs">
       <DependentUpon>BankModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DepositInfoWindow.xaml.cs">
+      <DependentUpon>DepositInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DatabaseModel\AppConnect.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -230,6 +230,12 @@
     <Resource Include="Resources\HomeIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Calculators\Calculators.csproj">
+      <Project>{d4be0fbc-1997-4c42-984e-94353428ad3f}</Project>
+      <Name>Calculators</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="DatabaseModel\BankModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BankModel.edmx</DependentUpon>
@@ -240,12 +246,6 @@
       <DependentUpon>BankModel.edmx</DependentUpon>
       <LastGenOutput>BankModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Calculators\Calculators.csproj">
-      <Project>{d4be0fbc-1997-4c42-984e-94353428ad3f}</Project>
-      <Name>Calculators</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

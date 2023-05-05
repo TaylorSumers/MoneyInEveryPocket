@@ -31,6 +31,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
+
                         <Border BorderBrush="LightGray" BorderThickness="1" Margin="25,40" Background="AliceBlue">
                             <Border.Effect>
                                 <DropShadowEffect ShadowDepth="20" Direction="140" Color="AliceBlue" Opacity="1" BlurRadius="60"/>
@@ -61,6 +62,7 @@
                                 </TextBlock>
                             </Grid>
                         </Border>
+
                         <DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding DepositRefillable}" Value="true">
                                 <Setter TargetName="rRefillable" Property="Text" Value="Пополняемый"/>
@@ -73,16 +75,10 @@
                             </DataTrigger>
                         </DataTemplate.Triggers>
 
-
                     </DataTemplate>
                 </ListView.ItemTemplate>
-
+                
             </ListView>
-
-
-
-
-
 
             <TextBlock Text="Кредиты" FontSize="50" Foreground="DarkBlue" Margin="20,0" Grid.Row="2"/>
 
