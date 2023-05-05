@@ -14,16 +14,7 @@ namespace MoneyInEveryPocket.DatabaseModel
     
     public partial class Region
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Region()
-        {
-            this.PlaceOfBirth = new HashSet<PlaceOfBirth>();
-        }
-    
         public int RegionID { get; set; }
         public string RegionName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlaceOfBirth> PlaceOfBirth { get; set; }
     }
 }

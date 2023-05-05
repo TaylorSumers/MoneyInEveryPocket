@@ -12,15 +12,14 @@ namespace MoneyInEveryPocket.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class OperationHistory
+    public partial class Deposit
     {
-        public int OpID { get; set; }
-        public int OpType { get; set; }
-        public System.DateTime OpDate { get; set; }
-        public decimal OpAmount { get; set; }
-        public long OpAccount { get; set; }
-    
-        public virtual Account Account { get; set; }
-        public virtual OperationType OperationType { get; set; }
+        public int DepositID { get; set; }
+        public string DepositName { get; set; }
+        public bool DepositRefillable { get; set; }
+        public bool DepositWithdrawable { get; set; }
+        public bool DepositCapitalization { get; set; }
+        public int DepositMinTerm { get; set; }
+        public decimal DepositPercent { get; set; }
     }
 }

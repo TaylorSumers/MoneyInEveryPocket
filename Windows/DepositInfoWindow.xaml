@@ -1,0 +1,52 @@
+﻿<Window x:Class="MoneyInEveryPocket.Windows.DepositInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MoneyInEveryPocket.Windows"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Калькулятор" Height="600" Width="800" ResizeMode="NoResize" Icon="/Resources/Logo.png">
+    <Grid>
+        <Image HorizontalAlignment="Left" Height="48" Margin="731,14,0,0" VerticalAlignment="Top" Width="49" Source="/Resources/Logo.png"/>
+        <TextBlock HorizontalAlignment="Left" Margin="489,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Деньги в каждый карман" Height="27" Width="260" FontStyle="Italic" FontSize="20" Foreground ="DarkBlue"/>
+        <TextBlock TextAlignment="Center" FontSize ="30" HorizontalAlignment="Left" Margin="58,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="47" Width="408" Text="{Binding DepositName, StringFormat={}Вклад {0}}"/>
+        <TextBlock FontSize ="23" HorizontalAlignment="Left" Margin="71,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="126"><Run Language="ru-ru" Text="Сумма"/></TextBlock>
+        <TextBox Name="SumValue" TextChanged="SumValue_TextChanged" TextWrapping="Wrap" FontSize="20" Text="{Binding ElementName=SummaSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="71,150,354,376"/>
+        <Slider Name="SummaSlider" HorizontalAlignment="Left" Margin="71,187,0,0" VerticalAlignment="Top" Width="361" Height="40" TickPlacement="BottomRight" Ticks="1000,1000000,5000000,10000000" IsSnapToTickEnabled="True" Minimum = "0" Maximum ="10000000"/>
+        <TextBlock FontSize ="23" HorizontalAlignment="Left" Margin="70,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="126"><Run Text="С"/><Run Language="ru-ru" Text="рок"/></TextBlock>
+        <TextBox  Name="TimeValue" TextChanged="SumValue_TextChanged" TextWrapping="Wrap" FontSize="20" Text="{Binding ElementName=TimeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="71,288,354,243"/>
+        <Slider Name="TimeSlider" HorizontalAlignment="Left" Margin="71,322,0,0" VerticalAlignment="Top" Width="361" Height="40" TickPlacement="BottomRight" Ticks="90,365,730,1825" IsSnapToTickEnabled="True" Minimum = "0" Maximum ="1825"/>
+        <TextBlock FontSize ="23" HorizontalAlignment="Left" Margin="71,402,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="375"><Run Text="Ежемесячное"/><Run Language="ru-ru" Text=" "/><Run Text="пополнение"/></TextBlock>
+        <TextBox  Name="AddValue" TextChanged="SumValue_TextChanged" TextWrapping="Wrap" FontSize="20" Text="{Binding ElementName=AdditionSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="71,438,354,94"/>
+        <Slider Name="AdditionSlider" HorizontalAlignment="Left" Margin="71,472,0,0" VerticalAlignment="Top" Width="361" Height="40" TickPlacement="BottomRight" Ticks="0,2500,5000" IsSnapToTickEnabled="True" Minimum = "0" Maximum ="5000"/>
+        <Border Style="{StaticResource brdContianer}" HorizontalAlignment="Left" Height="422" Margin="505,0,0,0" VerticalAlignment="Center" Width="258">
+            <Button Content="Оформить вклад" Margin="23,356,24,32" FontSize="17" Foreground="White" Background="Blue">
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="0" Direction="160" Color="DarkGray" Opacity="1" BlurRadius="20"/>
+                </Button.Effect>
+            </Button>
+        </Border>
+        <TextBlock FontWeight="DemiBold" FontSize="25" HorizontalAlignment="Left" Margin="532,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="174" Text="Доход"/>
+        <TextBlock Name="tbResult" FontSize="20" HorizontalAlignment="Left" Height="35" Margin="532,152,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="174"/>
+        <Rectangle HorizontalAlignment="Left" Height="2" Margin="531,185,0,0" Stroke="Black" VerticalAlignment="Top" Width="199"/>
+        <TextBlock FontWeight="DemiBold" FontSize="15" HorizontalAlignment="Left" Margin="532,309,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="118" Text="Счёт списания:"/>
+        <ComboBox Margin="531,337,118,207"/>
+        <TextBlock FontWeight="DemiBold" FontSize="15" HorizontalAlignment="Left" Margin="531,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="200" Text="Баланс на счету:"/>
+        <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="382,152,0,0" TextWrapping="Wrap" Text="Руб." VerticalAlignment="Top" Height="37" Width="64"/>
+        <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="382,438,0,0" TextWrapping="Wrap" Text="Руб." VerticalAlignment="Top" Height="37" Width="64"/>
+        <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="699,152,0,0" TextWrapping="Wrap" Text="Руб." VerticalAlignment="Top" Height="37" Width="64"/>
+        <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="382,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="64"><Run Language="ru-ru" Text="дней"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="58,219,0,0" TextWrapping="Wrap" Text="1 тыс." VerticalAlignment="Top" Width="53"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="96,219,0,0" TextWrapping="Wrap" Text="1 млн" VerticalAlignment="Top" Width="54"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="232,221,0,0" TextWrapping="Wrap" Text="5 млн" VerticalAlignment="Top" Width="53"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="413,220,0,0" TextWrapping="Wrap" Text="10 млн" VerticalAlignment="Top" Width="53"/>
+        <TextBlock HorizontalAlignment="Left" Height="24" Margin="58,353,0,0" TextWrapping="Wrap" Text="1 мес." VerticalAlignment="Top" Width="53"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="133,354,0,0" TextWrapping="Wrap" Text="1 год" VerticalAlignment="Top" Width="53"/>
+        <TextBlock HorizontalAlignment="Left" Height="22" Margin="200,354,0,0" TextWrapping="Wrap" Text="2 года" VerticalAlignment="Top" Width="52"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="413,354,0,0" TextWrapping="Wrap" Text="5 лет" VerticalAlignment="Top" Width="53"/>
+        <TextBlock HorizontalAlignment="Left" Height="22" Margin="73,503,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="232,503,0,0" TextWrapping="Wrap" Text="2.5 тыс." VerticalAlignment="Top" Width="53"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="406,503,0,0" TextWrapping="Wrap" Text="5 тыс." VerticalAlignment="Top" Width="53"/>
+    </Grid>
+</Window>

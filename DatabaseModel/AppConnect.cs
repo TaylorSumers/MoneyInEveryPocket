@@ -9,5 +9,6 @@ namespace MoneyInEveryPocket.DatabaseModel
     internal static class AppConnect
     {
         public static BankEntities cont = new BankEntities();
+        public static User CurrentUser;
     }
 }

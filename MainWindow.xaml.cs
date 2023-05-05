@@ -24,7 +24,28 @@ namespace MoneyInEveryPocket
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Content = new LoginPage(SPFuncs);
+        }
+
+        private void btnProfile_Click(object sender, RoutedEventArgs e)
+        {
             MainFrame.Content = new AccountInfoPage();
+        }
+
+        private void btnHistory_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new OperationsPage();
+        }
+
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new DepositsPage();
+        }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new LoginPage(SPFuncs);
+            SPFuncs.Visibility = Visibility.Hidden;
         }
     }
 }

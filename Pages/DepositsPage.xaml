@@ -1,0 +1,91 @@
+﻿<Page x:Class="MoneyInEveryPocket.Pages.DepositsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MoneyInEveryPocket.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1600"
+      Title="DepositsPage">
+
+    <ScrollViewer>
+        <Grid Background="White" Height="900">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.3*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Вклады" FontSize="50" Foreground="DarkBlue" Margin="20,0"/>
+
+            <ListView Grid.Row="1" Name="LVDepos" BorderBrush="Transparent" 
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden" MouseDoubleClick="LVDepos_MouseDoubleClick">
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="LightGray" BorderThickness="1" Margin="25,40" Background="AliceBlue">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="20" Direction="140" Color="AliceBlue" Opacity="1" BlurRadius="60"/>
+                            </Border.Effect>
+                            <Grid Width="300">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.3*"/>
+                                    <RowDefinition Height="0.25*"/>
+                                    <RowDefinition Height="0.25*"/>
+                                    <RowDefinition Height="0.2*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding DepositName}" FontSize="30" TextAlignment="Center" Margin="0,40"/>
+                                <TextBlock Grid.Row="1" TextAlignment="Center" Margin="0,10" FontSize="17">
+                                <Run Name="rRefillable" Text="Без пополнения"/><LineBreak/>
+                                <Run Name="rWithdrawable" Text="Без снятия"/><LineBreak/>
+                                <Run Name="rCapitalization" Text="Без капитализации"/>
+                                </TextBlock>
+                                <TextBlock Grid.Row="2" TextAlignment="Center" Margin="0,10" FontSize="15">
+                                <Run Text="Минимальный срок"/><LineBreak/>
+                                <Run Text="от"/>
+                                <Run Text="{Binding DepositMinTerm}"/>
+                                <Run Text="месяцев"/>
+                                <LineBreak/>
+                                </TextBlock>
+                                <TextBlock Grid.Row="3" TextAlignment="Center" Margin="0,10">
+                                <Run Text="{Binding DepositPercent, StringFormat={}{0:0}%}" FontSize="35" Foreground="DarkBlue" FontWeight="Bold"/>
+                                <Run Text=" годовых" Foreground="DarkBlue" FontSize="20"/>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding DepositRefillable}" Value="true">
+                                <Setter TargetName="rRefillable" Property="Text" Value="Пополняемый"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding DepositWithdrawable}" Value="true">
+                                <Setter TargetName="rWithdrawable" Property="Text" Value="Есть возможность снятия"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding DepositCapitalization}" Value="true">
+                                <Setter TargetName="rCapitalization" Property="Text" Value="С капитализацией"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+
+
+
+
+
+            <TextBlock Text="Кредиты" FontSize="50" Foreground="DarkBlue" Margin="20,0" Grid.Row="2"/>
+
+        </Grid>
+    </ScrollViewer>
+</Page>

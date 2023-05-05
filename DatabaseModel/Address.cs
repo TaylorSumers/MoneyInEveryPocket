@@ -21,6 +21,7 @@ namespace MoneyInEveryPocket.DatabaseModel
         }
     
         public int AddressID { get; set; }
+        public Nullable<int> AddressCity { get; set; }
         public int AddressStreet { get; set; }
         public string AddressHouse { get; set; }
         public string AddressBuilding { get; set; }
@@ -29,5 +30,6 @@ namespace MoneyInEveryPocket.DatabaseModel
         public virtual Street Street { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> User { get; set; }
+        public virtual City City { get; set; }
     }
 }

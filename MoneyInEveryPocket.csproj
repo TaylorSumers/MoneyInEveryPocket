@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>MoneyInEveryPocket</RootNamespace>
     <AssemblyName>MoneyInEveryPocket</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -66,6 +66,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Windows\DepositInfoWindow.xaml.cs">
+      <DependentUpon>DepositInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,16 +108,19 @@
     <Compile Include="DatabaseModel\Contract.cs">
       <DependentUpon>BankModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\Deposit.cs">
+      <DependentUpon>BankModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\OperationHistory.cs">
       <DependentUpon>BankModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\OperationType.cs">
       <DependentUpon>BankModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseModel\PassportIssueOrganization.cs">
+    <Compile Include="DatabaseModel\Passport.cs">
       <DependentUpon>BankModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseModel\PlaceOfBirth.cs">
+    <Compile Include="DatabaseModel\PassportIssueOrganization.cs">
       <DependentUpon>BankModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Region.cs">
@@ -137,11 +143,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\DepositsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\OperationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RegPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DepositInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,8 +168,14 @@
     <Compile Include="Pages\AccountInfoPage.xaml.cs">
       <DependentUpon>AccountInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DepositsPage.xaml.cs">
+      <DependentUpon>DepositsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OperationsPage.xaml.cs">
+      <DependentUpon>OperationsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegPage.xaml.cs">
       <DependentUpon>RegPage.xaml</DependentUpon>
@@ -196,6 +220,16 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\UserIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\HistoryIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\LogOutIcon.jpg" />
+    <Resource Include="Resources\HomeIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="DatabaseModel\BankModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BankModel.edmx</DependentUpon>
@@ -206,7 +240,12 @@
       <DependentUpon>BankModel.edmx</DependentUpon>
       <LastGenOutput>BankModel.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resources\UserIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Calculators\Calculators.csproj">
+      <Project>{d4be0fbc-1997-4c42-984e-94353428ad3f}</Project>
+      <Name>Calculators</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

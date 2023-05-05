@@ -3,13 +3,40 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-
       xmlns:local="clr-namespace:MoneyInEveryPocket"
       mc:Ignorable="d" 
       d:DesignHeight="810" d:DesignWidth="1600"
       Title="AccountInfoPage">
 
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="MaxLength" Value="30"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="IsEditable" Value="True"/>
+        </Style>
+        <Style TargetType="StackPanel">
+            <Setter Property="Margin" Value="20,0,0,20"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+    </Page.Resources>
+
     <Grid Background="White">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.2*"/>
             <ColumnDefinition Width="0.3*"/>
@@ -25,69 +52,92 @@
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="0.15*"/>
         </Grid.RowDefinitions>
-        <Image Grid.Row="1" Grid.RowSpan="2" Source="/Resources/UserIcon.png"/>
+
+        <Image Grid.Row="1" Grid.RowSpan="2" Name="imgUser" Margin="10,0,10,0">
+            <Image.Source>
+                <Binding Path="UserImage">
+                    <Binding.TargetNullValue>
+                        <ImageSource>/Resources/UserIcon.png</ImageSource>
+                    </Binding.TargetNullValue>
+                </Binding>
+            </Image.Source>
+        </Image>
+        <Button Grid.Row="3" Content="Изменить фото" Height="40" Width="170" Name="btnChangePhoto"
+                Click="btnChangePhoto_Click"/>
+
         <TextBlock Text="Контактная информация" Grid.Column="1" VerticalAlignment="Bottom" FontSize="30"/>
-        <TextBlock Text="Паспортные данные" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontSize="30"/>
-        <StackPanel Grid.Row="1" Grid.Column="1" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <TextBlock Text="Паспортные данные" Grid.Column="2" VerticalAlignment="Bottom" FontSize="30"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
             <TextBlock Text="Фамилия" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxName" Width="300" HorizontalAlignment="Left"/>
+            <TextBox Text="{Binding UserSurname}" IsReadOnly="True"/>
         </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="1" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="2" Grid.Column="1">
             <TextBlock Text="Имя" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxSurname" Width="300" HorizontalAlignment="Left"/>
+            <TextBox Text="{Binding UserName}" IsReadOnly="True"/>
         </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="1" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="3" Grid.Column="1">
             <TextBlock Text="Отчество" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxPatronymic" Width="300" HorizontalAlignment="Left"/>
+            <TextBox Text="{Binding UserPatronymic}" IsReadOnly="True"/>
         </StackPanel>
-        <StackPanel Grid.Row="4" Grid.Column="1" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="4" Grid.Column="1">
             <TextBlock Text="Телефон" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxPhone" Width="300" HorizontalAlignment="Left"/>
+            <TextBox Text="{Binding UserPhone}" Name="tbxPhone"/>
         </StackPanel>
-        <StackPanel Grid.Row="5" Grid.Column="1" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="5" Grid.Column="1">
             <TextBlock Text="Почта" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxEmail" Width="300" HorizontalAlignment="Left"/>
+            <TextBox Text="{Binding UserEmail}" Name="tbxEmail"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="2" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="1" Grid.Column="2">
             <TextBlock Text="Серия" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxSeries" Width="300" HorizontalAlignment="Left"/>
+            <TextBox Text="{Binding Passport.PassportSeries}" Name="tbxSeries"/>
         </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="2" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="2" Grid.Column="2">
             <TextBlock Text="Номер" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxNumber" Width="300" HorizontalAlignment="Left"/>
+            <TextBox Text="{Binding Passport.PassportNumber}" Name="tbxNum"/>
         </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="2" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="3" Grid.Column="2">
             <TextBlock Text="Дата выдачи" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxDateOfIssue" Width="300" HorizontalAlignment="Left"/>
+            <DatePicker Name="dpDateOfIssue" SelectedDate="{Binding Passport.PassportIssueDate}"/>
         </StackPanel>
-        <StackPanel Grid.Row="4" Grid.Column="2" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="4" Grid.Column="2">
             <TextBlock Text="Выдан" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxIssueOrg" Width="300" HorizontalAlignment="Left"/>
+            <ComboBox Name="cbxOrg" SelectedItem="{Binding Passport.PassportIssueOrganization}" 
+                      DisplayMemberPath="OrgName" SelectedValuePath="OrgID"/>
         </StackPanel>
-        <StackPanel Grid.Row="5" Grid.Column="2" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="5" Grid.Column="2">
             <TextBlock Text="Дата рождения" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxDateOfBirth" Width="300" HorizontalAlignment="Left"/>
+            <DatePicker Name="dpDateOfBirth" SelectedDate="{Binding UserDateOfBirth}"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="3" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="1" Grid.Column="4">
             <TextBlock Text="Город" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxCity" Width="300" HorizontalAlignment="Left"/>
+            <ComboBox Name="cbxCity" SelectedItem="{Binding Address.City}"
+                      DisplayMemberPath="CityName" SelectedValuePath="CityID"/>
         </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="3" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="2" Grid.Column="4">
             <TextBlock Text="Улица" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxStreet" Width="300" HorizontalAlignment="Left"/>
+            <ComboBox Name="cbxStreet" SelectedItem="{Binding Address.Street}"
+                      DisplayMemberPath="StreetName" SelectedValuePath="StreetID"/>
         </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="3" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="3" Grid.Column="4">
             <TextBlock Text="Дом" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxHouse" Width="300" HorizontalAlignment="Left"/>
+            <TextBox Name="tbxHouse" Text="{Binding Address.AddressHouse}"/>
         </StackPanel>
-        <StackPanel Grid.Row="4" Grid.Column="3" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="4" Grid.Column="4">
             <TextBlock Text="Строение" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxBuilding" Width="300" HorizontalAlignment="Left"/>
+            <TextBox Name="tbxBuilding" Text="{Binding Address.AddressBuilding}"/>
         </StackPanel>
-        <StackPanel Grid.Row="5" Grid.Column="3" Margin="20,0,0,20" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="5" Grid.Column="4">
             <TextBlock Text="Квартира" FontSize="15"/>
-            <TextBox Height="40" FontSize="25" MaxLength="30" Name="tbxApartment" Width="300" HorizontalAlignment="Left"/>
+            <TextBox Name="tbxApartment" Text="{Binding Address.AddressApartment}"/>
         </StackPanel>
-        <Button Grid.Column="3" Grid.Row="6" Height="40" Width="170" Content="Сохранить" Foreground="White" Background="DarkBlue" FontSize="20"/>
+        <Button Grid.Column="4" Grid.Row="6" Height="40" Width="170" Content="Сохранить"
+                Name="btnSave" Click="btnSave_Click"/>
+
+        <TextBlock Grid.Column="2" Grid.Row="6" ToolTip="Чтобы учётная запись получила статус подтвержденной,
+должны быть заполены паспортные данные. До тех пор учётная запись имеет статус упрощённой."
+                   VerticalAlignment="Center" Margin="20,0,20,0" FontSize="15">
+            <Run>Статус учётной записи:</Run>
+            <Run Name="rStatus" Foreground="Green">подтверждённная</Run>
+        </TextBlock>
     </Grid>
 </Page>

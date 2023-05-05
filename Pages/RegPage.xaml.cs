@@ -23,41 +23,51 @@ namespace MoneyInEveryPocket.Pages
     /// </summary>
     public partial class RegPage : Page
     {
-        public RegPage()
+        StackPanel SP;
+
+        public RegPage(StackPanel SPFunc)
         {
             InitializeComponent();
+            SP = SPFunc;
         }
+
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
             Reset();
-            bool IsDataValid = ValidateData(tbxName.Text, tbxSurname.Text, tbxPhone.Text);
-            int IsEmailPasValid = ValidateLogPas(tbxEmail.Text, psxPass.Password);
-            if (IsDataValid && IsEmailPasValid == 4) // all data is valid
+            bool isPersonalDataValid = ValidatePersonalData(tbxName.Text, tbxSurname.Text, tbxPhone.Text);
+            int isAuthDataValid = ValidateAuthData(tbxEmail.Text, psxPass.Password);
+            if (isPersonalDataValid && isAuthDataValid == 4) // all data is valid
             {
                 CreateNewUser();
-                MessageBox.Show("Данные внесены");
+                MessageBox.Show("Регистрация успешна", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.Navigate(new DepositsPage());
             }
-            else
+            else // something wrong
             {
                 string Message = "";
-                if (!IsDataValid || IsEmailPasValid == 0)
+                if (!isPersonalDataValid || isAuthDataValid == 0)
                     Message += "Неккоректно введены данные в выделенных полях;\n";
-                switch (IsEmailPasValid)
+                switch (isAuthDataValid)
                 {
                     case 1:
-                        Message += "Пользователь с таким адресом электронной почты уже существует;\n";
+                        Message += "Пользователь с таким адресом электронной почты уже существует\n";
                         break;
                     case 2:
-                        Message += "Пароль должен включать минимум 6 символов;\n";
+                        Message += "Пароль должен включать минимум 6 символов\n";
                         break;
                     case 3:
                         Message += "Пароли не совпадают";
                         break;
                 }
-                MessageBox.Show(Message);
+                MessageBox.Show(Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private bool ValidateData(string Name, string Surname, string Phone) // Checks the personal data
+
+        /// <summary>
+        /// Checks the personal data
+        /// </summary>
+        /// <returns> true if data is valid, else false</returns>
+        private bool ValidatePersonalData(string Name, string Surname, string Phone)
         {
             bool IsDataValid = true;
             if (Name == "")
@@ -79,15 +89,18 @@ namespace MoneyInEveryPocket.Pages
             return IsDataValid;
         }
 
-        private int ValidateLogPas (string UserEmail, string UserPassword) // Checks the Email and the Password
+        /// <summary>
+        /// Checks the Email and the Password
+        /// </summary>
+        /// <returns>
+        /// 0 - if email is empty or whitespase
+        /// 1 - if email already exists,
+        /// 2 - if password length less than 6,
+        /// 3 - if passwords don't match,
+        /// 4 - if all OK
+        /// </returns>
+        private int ValidateAuthData(string UserEmail, string UserPassword)
         {
-            // Returns
-            // 0 - if email is empty or whitespase
-            // 1 - if email already exists,
-            // 2 - if password length less than 6,
-            // 3 - if passwords don't match,
-            // 4 - if all OK
-
             var Dupls = cont.User.Where(user => user.UserEmail == UserEmail).ToList();
             if (String.IsNullOrWhiteSpace(UserEmail))
             {
@@ -111,8 +124,11 @@ namespace MoneyInEveryPocket.Pages
             }
             return 4;
         }
-        
-        private void Reset() // Sets borders of each textbox to gray
+
+        /// <summary>
+        /// Sets borders of each textbox to gray
+        /// </summary>
+        private void Reset()
         {
             tbxName.BorderBrush = Brushes.Gray;
             tbxSurname.BorderBrush = Brushes.Gray;
@@ -122,6 +138,9 @@ namespace MoneyInEveryPocket.Pages
             psxPassRep.BorderBrush = Brushes.Gray;
         } 
 
+        /// <summary>
+        /// Creates the new user with entered information
+        /// </summary>
         private void CreateNewUser()
         {
             User NewUser = new User
@@ -135,6 +154,12 @@ namespace MoneyInEveryPocket.Pages
             };
             cont.User.Add(NewUser);
             cont.SaveChanges();
+            CurrentUser = NewUser;
+        }
+
+        private void btnToAuth_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new LoginPage(SP));
         }
     }
 }

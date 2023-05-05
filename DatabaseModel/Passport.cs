@@ -12,15 +12,15 @@ namespace MoneyInEveryPocket.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class OperationHistory
+    public partial class Passport
     {
-        public int OpID { get; set; }
-        public int OpType { get; set; }
-        public System.DateTime OpDate { get; set; }
-        public decimal OpAmount { get; set; }
-        public long OpAccount { get; set; }
+        public int PassportID { get; set; }
+        public int PassportSeries { get; set; }
+        public int PassportNumber { get; set; }
+        public System.DateTime PassportIssueDate { get; set; }
+        public int PassportIssueOrg { get; set; }
     
-        public virtual Account Account { get; set; }
-        public virtual OperationType OperationType { get; set; }
+        public virtual PassportIssueOrganization PassportIssueOrganization { get; set; }
+        public virtual User User { get; set; }
     }
 }

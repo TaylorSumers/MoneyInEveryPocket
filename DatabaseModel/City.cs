@@ -17,13 +17,13 @@ namespace MoneyInEveryPocket.DatabaseModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public City()
         {
-            this.PlaceOfBirth = new HashSet<PlaceOfBirth>();
+            this.Address = new HashSet<Address>();
         }
     
         public int CityID { get; set; }
         public string CityName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlaceOfBirth> PlaceOfBirth { get; set; }
+        public virtual ICollection<Address> Address { get; set; }
     }
 }

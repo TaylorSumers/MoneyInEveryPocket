@@ -6,19 +6,64 @@
         xmlns:local="clr-namespace:MoneyInEveryPocket"
         mc:Ignorable="d"
         Title="Деньги в каждый карман" Height="900" Width="1600"
+        MinHeight="750" MinWidth="1000"
         Icon="Resources/Logo.png" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="55"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Margin" Value="10, 0"/>
+        </Style>
+    </Window.Resources>
     <Grid>
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*" MinHeight="90"/>
             <RowDefinition Height="0.9*"/>
         </Grid.RowDefinitions>
+        
         <StackPanel HorizontalAlignment="Left" Margin="5" Orientation="Horizontal">
             <Image Width="50" Source="Resources/Logo.png"/>
             <TextBlock VerticalAlignment="Center" Text="Деньги в каждый карман" FontStyle="Italic" FontSize="20" Foreground ="DarkBlue" Margin="5"/>
         </StackPanel>
-        <Button HorizontalAlignment="Right" Margin="10" Width="60" Background="Transparent" BorderBrush="Transparent">
-            <Image Source="Resources/UserIcon.png"/>
-        </Button>
+
+        <StackPanel Name="SPFuncs" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Visibility="Hidden">
+            <Button Name="btnLogOut" Click="btnLogOut_Click">
+                <StackPanel>
+                    <Image Source="/Resources/LogOutIcon.jpg"/>
+                    <TextBlock Text="Выйти" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <Button Name="btnHome" Click="btnHome_Click">
+                <StackPanel>
+                    <Image Source="/Resources/HomeIcon.png"/>
+                    <TextBlock Text="Главная" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <Button Name="btnHistory" Click="btnHistory_Click">
+                <StackPanel>
+                    <Image Source="/Resources/HistoryIcon.png"/>
+                    <TextBlock Text="История" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <Button HorizontalAlignment="Right" Name="btnProfile" Click="btnProfile_Click">
+                <StackPanel>
+                    <Image>
+                        <Image.Source>
+                            <Binding Path="UserImage">
+                                <Binding.TargetNullValue>
+                                    <ImageSource>/Resources/UserIcon.png</ImageSource>
+                                </Binding.TargetNullValue>
+                            </Binding>
+                        </Image.Source>
+                    </Image>
+                    <TextBlock Text="Профиль" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        
         <Frame Grid.Row="1" Name="MainFrame" NavigationUIVisibility ="Hidden"/>
+        
     </Grid>
 </Window>

@@ -17,13 +17,13 @@ namespace MoneyInEveryPocket.DatabaseModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PassportIssueOrganization()
         {
-            this.User = new HashSet<User>();
+            this.Passport = new HashSet<Passport>();
         }
     
         public int OrgID { get; set; }
         public string OrgName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> User { get; set; }
+        public virtual ICollection<Passport> Passport { get; set; }
     }
 }

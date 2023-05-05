@@ -55,7 +55,16 @@
                     <TextBlock Text="Повторите пароль" FontSize="15"/>
                     <PasswordBox Height="40" FontSize="25" MaxLength="30" Name="psxPassRep"/>
                 </StackPanel>
-                <Button Name="btnEnter" Click="btnEnter_Click" Grid.Row="5" Grid.Column="1" Content="Продолжить" Margin="20" Background="DarkBlue" Foreground="White" FontSize="15" Height="40" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                <StackPanel Grid.Row="5" Grid.Column="1" Margin="20" HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom" Orientation="Horizontal">
+                    <Button Name="btnToAuth" Background="Transparent" Height="30"
+                            BorderBrush="Transparent" Click="btnToAuth_Click">
+                        <TextBlock Text="Авторизоваться" Foreground="DarkBlue" TextDecorations="Underline"
+                                   FontSize="12"/>
+                    </Button>
+                    <Button Name="btnEnter" Click="btnEnter_Click" Content="Продолжить" Height="40" Width="150" Margin="30 0 0 0"/>
+                </StackPanel>
+                
             </Grid>
         </Border>
     </Grid>

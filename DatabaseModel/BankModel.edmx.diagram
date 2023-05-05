@@ -4,32 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="92ef1bcbb5eb4f27b3d96c37e9325fb2" Name="Diagram1">
-        <EntityTypeShape EntityType="BankModel.Account" Width="1.5" PointX="7.5" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.AccountType" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.Address" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.City" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.Contract" Width="1.5" PointX="9.75" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.OperationHistory" Width="1.5" PointX="12.75" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.OperationType" Width="1.5" PointX="10.5" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.PassportIssueOrganization" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.PlaceOfBirth" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.Region" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.Street" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.User" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+      <Diagram DiagramId="5554e45507d6479ea34b32dc611e7736" Name="Diagram1">
+        <EntityTypeShape EntityType="BankModel.Account" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.AccountType" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Address" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.City" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Contract" Width="1.5" PointX="12.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Deposit" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.OperationHistory" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.OperationType" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Passport" Width="1.5" PointX="10.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.PassportIssueOrganization" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Region" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Street" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.User" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
         <AssociationConnector Association="BankModel.FK__Банковски__ИДПол__4D94879B" ManuallyRouted="false" />
         <AssociationConnector Association="BankModel.FK__Банковски__ИДтип__4E88ABD4" ManuallyRouted="false" />
         <AssociationConnector Association="BankModel.FK__Договор__НомерСч__5070F446" ManuallyRouted="false" />
         <AssociationConnector Association="BankModel.FK__История__Аккаунт__5165187F" ManuallyRouted="false" />
         <AssociationConnector Association="BankModel.FK__Адреса__Улица__4CA06362" ManuallyRouted="false" />
         <AssociationConnector Association="BankModel.FK__Пользоват__Адрес__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="BankModel.FK__Место_рож__Город__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Address_City" ManuallyRouted="false" />
         <AssociationConnector Association="BankModel.FK__Договор__ИД_Поль__4F7CD00D" ManuallyRouted="false" />
         <AssociationConnector Association="BankModel.FK__История__Тип__52593CB8" ManuallyRouted="false" />
-        <AssociationConnector Association="BankModel.FK__Пользоват__Выдан__5629CD9C" ManuallyRouted="false" />
-        <AssociationConnector Association="BankModel.FK__Место_рож__Облас__5441852A" ManuallyRouted="false" />
-        <AssociationConnector Association="BankModel.FK__Пользоват__Место__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK__Passport__Passpo__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Passport_User" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

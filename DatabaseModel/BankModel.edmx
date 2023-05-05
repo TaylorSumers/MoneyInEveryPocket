@@ -27,6 +27,7 @@
             <PropertyRef Name="AddressID" />
           </Key>
           <Property Name="AddressID" Type="int" Nullable="false" />
+          <Property Name="AddressCity" Type="int" />
           <Property Name="AddressStreet" Type="int" Nullable="false" />
           <Property Name="AddressHouse" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="AddressBuilding" Type="varchar" MaxLength="5" />
@@ -51,13 +52,25 @@
           <Property Name="ContractExpirationDate" Type="date" Nullable="false" />
           <Property Name="ContractPercent" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="Deposit">
+          <Key>
+            <PropertyRef Name="DepositID" />
+          </Key>
+          <Property Name="DepositID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepositName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DepositRefillable" Type="bit" Nullable="false" />
+          <Property Name="DepositWithdrawable" Type="bit" Nullable="false" />
+          <Property Name="DepositCapitalization" Type="bit" Nullable="false" />
+          <Property Name="DepositMinTerm" Type="int" Nullable="false" />
+          <Property Name="DepositPercent" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="OperationHistory">
           <Key>
             <PropertyRef Name="OpID" />
           </Key>
           <Property Name="OpID" Type="int" Nullable="false" />
           <Property Name="OpType" Type="int" Nullable="false" />
-          <Property Name="OpTime" Type="datetime" Nullable="false" />
+          <Property Name="OpDate" Type="date" Nullable="false" />
           <Property Name="OpAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="OpAccount" Type="bigint" Nullable="false" />
         </EntityType>
@@ -68,20 +81,22 @@
           <Property Name="OpTypeID" Type="int" Nullable="false" />
           <Property Name="OpTypeName" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <EntityType Name="Passport">
+          <Key>
+            <PropertyRef Name="PassportID" />
+          </Key>
+          <Property Name="PassportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PassportSeries" Type="int" Nullable="false" />
+          <Property Name="PassportNumber" Type="int" Nullable="false" />
+          <Property Name="PassportIssueDate" Type="date" Nullable="false" />
+          <Property Name="PassportIssueOrg" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="PassportIssueOrganization">
           <Key>
             <PropertyRef Name="OrgID" />
           </Key>
           <Property Name="OrgID" Type="int" Nullable="false" />
           <Property Name="OrgName" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PlaceOfBirth">
-          <Key>
-            <PropertyRef Name="PlaceID" />
-          </Key>
-          <Property Name="PlaceID" Type="int" Nullable="false" />
-          <Property Name="PlaceCity" Type="int" Nullable="false" />
-          <Property Name="PlaceRegion" Type="int" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -111,21 +126,29 @@
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UserSurname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UserPatronymic" Type="varchar" MaxLength="50" />
-          <Property Name="Серия" Type="varchar" MaxLength="50" />
-          <Property Name="Номер" Type="varchar" MaxLength="50" />
           <Property Name="UserPhone" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="UserAddress" Type="int" />
           <Property Name="UserEmail" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="UserPassword" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ДатаВыдачи" Type="date" />
-          <Property Name="Выдан" Type="int" />
           <Property Name="UserDateOfBirth" Type="date" />
-          <Property Name="UserPlaceOfBirth" Type="int" />
+          <Property Name="UserImage" Type="image" />
         </EntityType>
+        <Association Name="FK__Passport__Passpo__114A936A">
+          <End Role="PassportIssueOrganization" Type="Self.PassportIssueOrganization" Multiplicity="1" />
+          <End Role="Passport" Type="Self.Passport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PassportIssueOrganization">
+              <PropertyRef Name="OrgID" />
+            </Principal>
+            <Dependent Role="Passport">
+              <PropertyRef Name="PassportIssueOrg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Адреса__Улица__4CA06362">
           <End Role="Street" Type="Self.Street" Multiplicity="1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
@@ -210,30 +233,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Место_рож__Город__534D60F1">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="PlaceOfBirth" Type="Self.PlaceOfBirth" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="CityID" />
-            </Principal>
-            <Dependent Role="PlaceOfBirth">
-              <PropertyRef Name="PlaceCity" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Место_рож__Облас__5441852A">
-          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
-          <End Role="PlaceOfBirth" Type="Self.PlaceOfBirth" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="RegionID" />
-            </Principal>
-            <Dependent Role="PlaceOfBirth">
-              <PropertyRef Name="PlaceRegion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Пользоват__Адрес__5535A963">
           <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -246,27 +245,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Пользоват__Выдан__5629CD9C">
-          <End Role="PassportIssueOrganization" Type="Self.PassportIssueOrganization" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+        <Association Name="FK_Address_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PassportIssueOrganization">
-              <PropertyRef Name="OrgID" />
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
             </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="Выдан" />
+            <Dependent Role="Address">
+              <PropertyRef Name="AddressCity" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Пользоват__Место__571DF1D5">
-          <End Role="PlaceOfBirth" Type="Self.PlaceOfBirth" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+        <Association Name="FK_Passport_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Passport" Type="Self.Passport" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="PlaceOfBirth">
-              <PropertyRef Name="PlaceID" />
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="UserPlaceOfBirth" />
+            <Dependent Role="Passport">
+              <PropertyRef Name="PassportID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -276,14 +275,19 @@
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deposit" EntityType="Self.Deposit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OperationHistory" EntityType="Self.OperationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OperationType" EntityType="Self.OperationType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Passport" EntityType="Self.Passport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PassportIssueOrganization" EntityType="Self.PassportIssueOrganization" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PlaceOfBirth" EntityType="Self.PlaceOfBirth" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Street" EntityType="Self.Street" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Passport__Passpo__114A936A" Association="Self.FK__Passport__Passpo__114A936A">
+            <End Role="PassportIssueOrganization" EntitySet="PassportIssueOrganization" />
+            <End Role="Passport" EntitySet="Passport" />
+          </AssociationSet>
           <AssociationSet Name="FK__Адреса__Улица__4CA06362" Association="Self.FK__Адреса__Улица__4CA06362">
             <End Role="Street" EntitySet="Street" />
             <End Role="Address" EntitySet="Address" />
@@ -312,25 +316,17 @@
             <End Role="OperationType" EntitySet="OperationType" />
             <End Role="OperationHistory" EntitySet="OperationHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK__Место_рож__Город__534D60F1" Association="Self.FK__Место_рож__Город__534D60F1">
-            <End Role="City" EntitySet="City" />
-            <End Role="PlaceOfBirth" EntitySet="PlaceOfBirth" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Место_рож__Облас__5441852A" Association="Self.FK__Место_рож__Облас__5441852A">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="PlaceOfBirth" EntitySet="PlaceOfBirth" />
-          </AssociationSet>
           <AssociationSet Name="FK__Пользоват__Адрес__5535A963" Association="Self.FK__Пользоват__Адрес__5535A963">
             <End Role="Address" EntitySet="Address" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK__Пользоват__Выдан__5629CD9C" Association="Self.FK__Пользоват__Выдан__5629CD9C">
-            <End Role="PassportIssueOrganization" EntitySet="PassportIssueOrganization" />
-            <End Role="User" EntitySet="User" />
+          <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Address" EntitySet="Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__Пользоват__Место__571DF1D5" Association="Self.FK__Пользоват__Место__571DF1D5">
-            <End Role="PlaceOfBirth" EntitySet="PlaceOfBirth" />
+          <AssociationSet Name="FK_Passport_User" Association="Self.FK_Passport_User">
             <End Role="User" EntitySet="User" />
+            <End Role="Passport" EntitySet="Passport" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -365,12 +361,14 @@
             <PropertyRef Name="AddressID" />
           </Key>
           <Property Name="AddressID" Type="Int32" Nullable="false" />
+          <Property Name="AddressCity" Type="Int32" />
           <Property Name="AddressStreet" Type="Int32" Nullable="false" />
           <Property Name="AddressHouse" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AddressBuilding" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="AddressApartment" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Street" Relationship="Self.FK__Адреса__Улица__4CA06362" FromRole="Address" ToRole="Street" />
           <NavigationProperty Name="User" Relationship="Self.FK__Пользоват__Адрес__5535A963" FromRole="Address" ToRole="User" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Address_City" FromRole="Address" ToRole="City" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -378,7 +376,7 @@
           </Key>
           <Property Name="CityID" Type="Int32" Nullable="false" />
           <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="PlaceOfBirth" Relationship="Self.FK__Место_рож__Город__534D60F1" FromRole="City" ToRole="PlaceOfBirth" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Address_City" FromRole="City" ToRole="Address" />
         </EntityType>
         <EntityType Name="Contract">
           <Key>
@@ -394,13 +392,25 @@
           <NavigationProperty Name="Account" Relationship="Self.FK__Договор__НомерСч__5070F446" FromRole="Contract" ToRole="Account" />
           <NavigationProperty Name="User" Relationship="Self.FK__Договор__ИД_Поль__4F7CD00D" FromRole="Contract" ToRole="User" />
         </EntityType>
+        <EntityType Name="Deposit">
+          <Key>
+            <PropertyRef Name="DepositID" />
+          </Key>
+          <Property Name="DepositID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepositName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DepositRefillable" Type="Boolean" Nullable="false" />
+          <Property Name="DepositWithdrawable" Type="Boolean" Nullable="false" />
+          <Property Name="DepositCapitalization" Type="Boolean" Nullable="false" />
+          <Property Name="DepositMinTerm" Type="Int32" Nullable="false" />
+          <Property Name="DepositPercent" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="OperationHistory">
           <Key>
             <PropertyRef Name="OpID" />
           </Key>
           <Property Name="OpID" Type="Int32" Nullable="false" />
           <Property Name="OpType" Type="Int32" Nullable="false" />
-          <Property Name="OpTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OpDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="OpAmount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="OpAccount" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="Self.FK__История__Аккаунт__5165187F" FromRole="OperationHistory" ToRole="Account" />
@@ -414,24 +424,25 @@
           <Property Name="OpTypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="OperationHistory" Relationship="Self.FK__История__Тип__52593CB8" FromRole="OperationType" ToRole="OperationHistory" />
         </EntityType>
+        <EntityType Name="Passport">
+          <Key>
+            <PropertyRef Name="PassportID" />
+          </Key>
+          <Property Name="PassportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PassportSeries" Type="Int32" Nullable="false" />
+          <Property Name="PassportNumber" Type="Int32" Nullable="false" />
+          <Property Name="PassportIssueDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PassportIssueOrg" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PassportIssueOrganization" Relationship="Self.FK__Passport__Passpo__114A936A" FromRole="Passport" ToRole="PassportIssueOrganization" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Passport_User" FromRole="Passport" ToRole="User" />
+        </EntityType>
         <EntityType Name="PassportIssueOrganization">
           <Key>
             <PropertyRef Name="OrgID" />
           </Key>
           <Property Name="OrgID" Type="Int32" Nullable="false" />
           <Property Name="OrgName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Пользоват__Выдан__5629CD9C" FromRole="PassportIssueOrganization" ToRole="User" />
-        </EntityType>
-        <EntityType Name="PlaceOfBirth">
-          <Key>
-            <PropertyRef Name="PlaceID" />
-          </Key>
-          <Property Name="PlaceID" Type="Int32" Nullable="false" />
-          <Property Name="PlaceCity" Type="Int32" Nullable="false" />
-          <Property Name="PlaceRegion" Type="Int32" />
-          <NavigationProperty Name="City" Relationship="Self.FK__Место_рож__Город__534D60F1" FromRole="PlaceOfBirth" ToRole="City" />
-          <NavigationProperty Name="Region" Relationship="Self.FK__Место_рож__Облас__5441852A" FromRole="PlaceOfBirth" ToRole="Region" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Пользоват__Место__571DF1D5" FromRole="PlaceOfBirth" ToRole="User" />
+          <NavigationProperty Name="Passport" Relationship="Self.FK__Passport__Passpo__114A936A" FromRole="PassportIssueOrganization" ToRole="Passport" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -439,7 +450,6 @@
           </Key>
           <Property Name="RegionID" Type="Int32" Nullable="false" />
           <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="PlaceOfBirth" Relationship="Self.FK__Место_рож__Облас__5441852A" FromRole="Region" ToRole="PlaceOfBirth" />
         </EntityType>
         <EntityType Name="Street">
           <Key>
@@ -463,25 +473,20 @@
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserPatronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Серия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Номер" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserAddress" Type="Int32" />
           <Property Name="UserEmail" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ДатаВыдачи" Type="DateTime" Precision="0" />
-          <Property Name="Выдан" Type="Int32" />
           <Property Name="UserDateOfBirth" Type="DateTime" Precision="0" />
-          <Property Name="UserPlaceOfBirth" Type="Int32" />
+          <Property Name="UserImage" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Account" Relationship="Self.FK__Банковски__ИДПол__4D94879B" FromRole="User" ToRole="Account" />
           <NavigationProperty Name="Address" Relationship="Self.FK__Пользоват__Адрес__5535A963" FromRole="User" ToRole="Address" />
           <NavigationProperty Name="Contract" Relationship="Self.FK__Договор__ИД_Поль__4F7CD00D" FromRole="User" ToRole="Contract" />
-          <NavigationProperty Name="PassportIssueOrganization" Relationship="Self.FK__Пользоват__Выдан__5629CD9C" FromRole="User" ToRole="PassportIssueOrganization" />
-          <NavigationProperty Name="PlaceOfBirth" Relationship="Self.FK__Пользоват__Место__571DF1D5" FromRole="User" ToRole="PlaceOfBirth" />
+          <NavigationProperty Name="Passport" Relationship="Self.FK_Passport_User" FromRole="User" ToRole="Passport" />
         </EntityType>
         <Association Name="FK__Банковски__ИДПол__4D94879B">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -555,15 +560,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Место_рож__Город__534D60F1">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="PlaceOfBirth" Type="Self.PlaceOfBirth" Multiplicity="*" />
+        <Association Name="FK_Address_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="CityID" />
             </Principal>
-            <Dependent Role="PlaceOfBirth">
-              <PropertyRef Name="PlaceCity" />
+            <Dependent Role="Address">
+              <PropertyRef Name="AddressCity" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -591,39 +596,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Пользоват__Выдан__5629CD9C">
-          <End Role="PassportIssueOrganization" Type="Self.PassportIssueOrganization" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+        <Association Name="FK__Passport__Passpo__114A936A">
+          <End Role="PassportIssueOrganization" Type="Self.PassportIssueOrganization" Multiplicity="1" />
+          <End Role="Passport" Type="Self.Passport" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PassportIssueOrganization">
               <PropertyRef Name="OrgID" />
             </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="Выдан" />
+            <Dependent Role="Passport">
+              <PropertyRef Name="PassportIssueOrg" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Место_рож__Облас__5441852A">
-          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
-          <End Role="PlaceOfBirth" Type="Self.PlaceOfBirth" Multiplicity="*" />
+        <Association Name="FK_Passport_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Passport" Type="Self.Passport" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="RegionID" />
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="PlaceOfBirth">
-              <PropertyRef Name="PlaceRegion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Пользоват__Место__571DF1D5">
-          <End Role="PlaceOfBirth" Type="Self.PlaceOfBirth" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PlaceOfBirth">
-              <PropertyRef Name="PlaceID" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="UserPlaceOfBirth" />
+            <Dependent Role="Passport">
+              <PropertyRef Name="PassportID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -633,10 +626,11 @@
           <EntitySet Name="Address" EntityType="Self.Address" />
           <EntitySet Name="City" EntityType="Self.City" />
           <EntitySet Name="Contract" EntityType="Self.Contract" />
+          <EntitySet Name="Deposit" EntityType="Self.Deposit" />
           <EntitySet Name="OperationHistory" EntityType="Self.OperationHistory" />
           <EntitySet Name="OperationType" EntityType="Self.OperationType" />
+          <EntitySet Name="Passport" EntityType="Self.Passport" />
           <EntitySet Name="PassportIssueOrganization" EntityType="Self.PassportIssueOrganization" />
-          <EntitySet Name="PlaceOfBirth" EntityType="Self.PlaceOfBirth" />
           <EntitySet Name="Region" EntityType="Self.Region" />
           <EntitySet Name="Street" EntityType="Self.Street" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -665,9 +659,9 @@
             <End Role="Address" EntitySet="Address" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK__Место_рож__Город__534D60F1" Association="Self.FK__Место_рож__Город__534D60F1">
+          <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
             <End Role="City" EntitySet="City" />
-            <End Role="PlaceOfBirth" EntitySet="PlaceOfBirth" />
+            <End Role="Address" EntitySet="Address" />
           </AssociationSet>
           <AssociationSet Name="FK__Договор__ИД_Поль__4F7CD00D" Association="Self.FK__Договор__ИД_Поль__4F7CD00D">
             <End Role="User" EntitySet="User" />
@@ -677,17 +671,13 @@
             <End Role="OperationType" EntitySet="OperationType" />
             <End Role="OperationHistory" EntitySet="OperationHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK__Пользоват__Выдан__5629CD9C" Association="Self.FK__Пользоват__Выдан__5629CD9C">
+          <AssociationSet Name="FK__Passport__Passpo__114A936A" Association="Self.FK__Passport__Passpo__114A936A">
             <End Role="PassportIssueOrganization" EntitySet="PassportIssueOrganization" />
-            <End Role="User" EntitySet="User" />
+            <End Role="Passport" EntitySet="Passport" />
           </AssociationSet>
-          <AssociationSet Name="FK__Место_рож__Облас__5441852A" Association="Self.FK__Место_рож__Облас__5441852A">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="PlaceOfBirth" EntitySet="PlaceOfBirth" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Пользоват__Место__571DF1D5" Association="Self.FK__Пользоват__Место__571DF1D5">
-            <End Role="PlaceOfBirth" EntitySet="PlaceOfBirth" />
+          <AssociationSet Name="FK_Passport_User" Association="Self.FK_Passport_User">
             <End Role="User" EntitySet="User" />
+            <End Role="Passport" EntitySet="Passport" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -719,6 +709,7 @@
             <EntityTypeMapping TypeName="BankModel.Address">
               <MappingFragment StoreEntitySet="Address">
                 <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="AddressCity" ColumnName="AddressCity" />
                 <ScalarProperty Name="AddressStreet" ColumnName="AddressStreet" />
                 <ScalarProperty Name="AddressHouse" ColumnName="AddressHouse" />
                 <ScalarProperty Name="AddressBuilding" ColumnName="AddressBuilding" />
@@ -747,12 +738,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Deposit">
+            <EntityTypeMapping TypeName="BankModel.Deposit">
+              <MappingFragment StoreEntitySet="Deposit">
+                <ScalarProperty Name="DepositID" ColumnName="DepositID" />
+                <ScalarProperty Name="DepositName" ColumnName="DepositName" />
+                <ScalarProperty Name="DepositRefillable" ColumnName="DepositRefillable" />
+                <ScalarProperty Name="DepositWithdrawable" ColumnName="DepositWithdrawable" />
+                <ScalarProperty Name="DepositCapitalization" ColumnName="DepositCapitalization" />
+                <ScalarProperty Name="DepositMinTerm" ColumnName="DepositMinTerm" />
+                <ScalarProperty Name="DepositPercent" ColumnName="DepositPercent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="OperationHistory">
             <EntityTypeMapping TypeName="BankModel.OperationHistory">
               <MappingFragment StoreEntitySet="OperationHistory">
                 <ScalarProperty Name="OpID" ColumnName="OpID" />
                 <ScalarProperty Name="OpType" ColumnName="OpType" />
-                <ScalarProperty Name="OpTime" ColumnName="OpTime" />
+                <ScalarProperty Name="OpDate" ColumnName="OpDate" />
                 <ScalarProperty Name="OpAmount" ColumnName="OpAmount" />
                 <ScalarProperty Name="OpAccount" ColumnName="OpAccount" />
               </MappingFragment>
@@ -766,20 +770,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Passport">
+            <EntityTypeMapping TypeName="BankModel.Passport">
+              <MappingFragment StoreEntitySet="Passport">
+                <ScalarProperty Name="PassportID" ColumnName="PassportID" />
+                <ScalarProperty Name="PassportSeries" ColumnName="PassportSeries" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+                <ScalarProperty Name="PassportIssueDate" ColumnName="PassportIssueDate" />
+                <ScalarProperty Name="PassportIssueOrg" ColumnName="PassportIssueOrg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PassportIssueOrganization">
             <EntityTypeMapping TypeName="BankModel.PassportIssueOrganization">
               <MappingFragment StoreEntitySet="PassportIssueOrganization">
                 <ScalarProperty Name="OrgID" ColumnName="OrgID" />
                 <ScalarProperty Name="OrgName" ColumnName="OrgName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PlaceOfBirth">
-            <EntityTypeMapping TypeName="BankModel.PlaceOfBirth">
-              <MappingFragment StoreEntitySet="PlaceOfBirth">
-                <ScalarProperty Name="PlaceID" ColumnName="PlaceID" />
-                <ScalarProperty Name="PlaceCity" ColumnName="PlaceCity" />
-                <ScalarProperty Name="PlaceRegion" ColumnName="PlaceRegion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -817,16 +823,12 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserSurname" ColumnName="UserSurname" />
                 <ScalarProperty Name="UserPatronymic" ColumnName="UserPatronymic" />
-                <ScalarProperty Name="Серия" ColumnName="Серия" />
-                <ScalarProperty Name="Номер" ColumnName="Номер" />
                 <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
                 <ScalarProperty Name="UserAddress" ColumnName="UserAddress" />
                 <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
                 <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
-                <ScalarProperty Name="ДатаВыдачи" ColumnName="ДатаВыдачи" />
-                <ScalarProperty Name="Выдан" ColumnName="Выдан" />
                 <ScalarProperty Name="UserDateOfBirth" ColumnName="UserDateOfBirth" />
-                <ScalarProperty Name="UserPlaceOfBirth" ColumnName="UserPlaceOfBirth" />
+                <ScalarProperty Name="UserImage" ColumnName="UserImage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
