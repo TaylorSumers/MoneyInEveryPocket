@@ -4,20 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9e557e33d4b949389c08064be49e5799" Name="Diagram1">
+      <Diagram DiagramId="8003acb1d9894df98ffdfe5deb440e07" Name="Diagram1">
         <EntityTypeShape EntityType="BankModel.Account" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.AccountType" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.Address" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.City" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.Contract" Width="1.5" PointX="12.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.Deposit" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Credit" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Debit" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Deposit" Width="1.5" PointX="4.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.OperationHistory" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.OperationType" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.Passport" Width="1.5" PointX="10.5" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.PassportIssueOrganization" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.Region" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Region" Width="1.5" PointX="6.75" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.Street" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.User" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
         <AssociationConnector Association="BankModel.FK__Банковски__ИДПол__4D94879B" ManuallyRouted="false" />
         <AssociationConnector Association="BankModel.FK__Банковски__ИДтип__4E88ABD4" ManuallyRouted="false" />

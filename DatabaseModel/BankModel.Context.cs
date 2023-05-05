@@ -30,6 +30,8 @@ namespace MoneyInEveryPocket.DatabaseModel
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Contract> Contract { get; set; }
+        public virtual DbSet<Credit> Credit { get; set; }
+        public virtual DbSet<Debit> Debit { get; set; }
         public virtual DbSet<Deposit> Deposit { get; set; }
         public virtual DbSet<OperationHistory> OperationHistory { get; set; }
         public virtual DbSet<OperationType> OperationType { get; set; }

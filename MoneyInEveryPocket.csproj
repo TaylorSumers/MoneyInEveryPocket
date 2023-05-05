@@ -96,6 +96,12 @@
     <Compile Include="DatabaseModel\Contract.cs">
       <DependentUpon>BankModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\Credit.cs">
+      <DependentUpon>BankModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\Debit.cs">
+      <DependentUpon>BankModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\Deposit.cs">
       <DependentUpon>BankModel.tt</DependentUpon>
     </Compile>

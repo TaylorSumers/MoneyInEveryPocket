@@ -27,6 +27,8 @@ namespace MoneyInEveryPocket.Pages
         {
             InitializeComponent();
             LVDepos.ItemsSource = cont.Deposit.ToList();
+            LVDepos1.ItemsSource = cont.Deposit.ToList();
+            LVDepos2.ItemsSource = cont.Deposit.ToList();
         }
 
         private void LVDepos_MouseDoubleClick(object sender, MouseButtonEventArgs e)
