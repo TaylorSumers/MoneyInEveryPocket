@@ -79,6 +79,11 @@ namespace MoneyInEveryPocket.Windows
                 tbBalance.DataContext = cbxAccount.SelectedItem;
         }
 
+
+        /// <summary>
+        /// Following method contains algorithm of creating a new deposit.
+        /// Each step of that algorithm is explained by comments inside the method.
+        /// </summary>
         private void btnMakeDeposit_Click(object sender, RoutedEventArgs e)
         {
             // Select account for withdraw money

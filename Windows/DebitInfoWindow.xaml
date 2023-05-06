@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MoneyInEveryPocket.Windows"
         mc:Ignorable="d"
-        Title="DebitInfoWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Калькулятор" Height="600" Width="800" ResizeMode="NoResize" Icon="/Resources/Logo.png">
     <Grid>
-        
+        <Image HorizontalAlignment="Left" Height="48" Margin="731,14,0,0" VerticalAlignment="Top" Width="49" Source="/Resources/Logo.png"/>
+        <TextBlock HorizontalAlignment="Left" Margin="489,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Деньги в каждый карман" Height="27" Width="260" FontStyle="Italic" FontSize="20" Foreground ="DarkBlue"/>
+        <TextBlock TextAlignment="Center" FontSize ="30" HorizontalAlignment="Left" Margin="10,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="47" Width="479" Text="{Binding DebitName, StringFormat={}{0} дебетовая карта}"/>
+        <TextBlock FontSize ="23" HorizontalAlignment="Left" Margin="71,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="395"><Run Text="Планируемая сумма затрат"/><Run Language="ru-ru" Text=" в месяц"/></TextBlock>
+        <TextBox Name="SumValue" TextChanged="SumValue_TextChanged" TextWrapping="Wrap" FontSize="20" Text="{Binding ElementName=SummaSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="71,150,354,376"/>
+        <Slider Name="SummaSlider" HorizontalAlignment="Left" Margin="71,187,0,0" VerticalAlignment="Top" Width="361" Height="40" TickPlacement="BottomRight" Ticks="10000,100000,500000,1000000" IsSnapToTickEnabled="True" Minimum = "10000" Maximum ="1000000"/>
+        <TextBlock FontSize ="23" HorizontalAlignment="Left" Margin="70,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="126"><Run Text="С"/><Run Language="ru-ru" Text="рок"/></TextBlock>
+        <TextBox  Name="TimeValue" TextChanged="SumValue_TextChanged" TextWrapping="Wrap" FontSize="20" Text="{Binding ElementName=TimeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="71,288,354,243"/>
+        <Slider Name="TimeSlider" HorizontalAlignment="Left" Margin="71,322,0,0" VerticalAlignment="Top" Width="361" Height="40" TickPlacement="BottomRight" Ticks="1,2,3,4,5" IsSnapToTickEnabled="True" Minimum = "1" Maximum ="5"/>
+        <Border Style="{StaticResource brdContianer}" HorizontalAlignment="Left" Height="422" Margin="505,0,0,0" VerticalAlignment="Center" Width="258">
+            <Button Content="Оформить карту" Margin="23,356,24,32" FontSize="17" Foreground="White" Background="Blue" Name="btnCreateCard" Click="btnCreateCard_Click">
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="0" Direction="160" Color="DarkGray" Opacity="1" BlurRadius="20"/>
+                </Button.Effect>
+            </Button>
+        </Border>
+        <TextBlock FontWeight="DemiBold" FontSize="20" HorizontalAlignment="Left" Margin="531,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="174"><Run Language="ru-ru" Text="Доход по карте"/></TextBlock>
+        <TextBlock Name="tbResult" FontSize="20" HorizontalAlignment="Left" Height="35" Margin="532,152,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="174"/>
+        <Rectangle HorizontalAlignment="Left" Height="2" Margin="531,185,0,0" Stroke="Black" VerticalAlignment="Top" Width="199"/>
+        <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="382,152,0,0" TextWrapping="Wrap" Text="Руб." VerticalAlignment="Top" Height="37" Width="64"/>
+        <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="699,152,0,0" TextWrapping="Wrap" Text="Руб." VerticalAlignment="Top" Height="37" Width="64"/>
+        <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="382,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="64" Text="Лет"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="48,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52"><Run Text="1"/><Run Language="ru-ru" Text="0"/><Run Text=" тыс."/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="100,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54"><Run Text="1"/><Run Language="ru-ru" Text="00"/><Run Text=" "/><Run Language="ru-ru" Text="тыс."/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="232,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53"><Run Text="5"/><Run Language="ru-ru" Text="00 тыс."/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="413,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53"><Run Text="1"/><Run Text=" млн"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="24" Margin="58,353,0,0" TextWrapping="Wrap" Text="1 год" VerticalAlignment="Top" Width="53"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="147,354,0,0" TextWrapping="Wrap" Text="2 года" VerticalAlignment="Top" Width="53"/>
+        <TextBlock HorizontalAlignment="Left" Height="22" Margin="232,355,0,0" TextWrapping="Wrap" Text="3 года" VerticalAlignment="Top" Width="52"/>
+        <TextBlock HorizontalAlignment="Left" Height="22" Margin="328,355,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52"><Run Language="ru-ru" Text="4"/><Run Text=" года"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="413,354,0,0" TextWrapping="Wrap" Text="5 лет" VerticalAlignment="Top" Width="53"/>
+        <TextBlock HorizontalAlignment="Left" Margin="532,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="76" Width="202"><Run Text="*"/><Run Language="ru-ru" Text="Реальные значения дохода могут отличаться в зависимости от размера фактических трат"/></TextBlock>
     </Grid>
 </Window>
