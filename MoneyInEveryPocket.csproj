@@ -129,6 +129,12 @@
     <Compile Include="DatabaseModel\User.cs">
       <DependentUpon>BankModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Windows\CreditInfoWindow.xaml.cs">
+      <DependentUpon>CreditInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DebitInfoWindow.xaml.cs">
+      <DependentUpon>DebitInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DepositInfoWindow.xaml.cs">
       <DependentUpon>DepositInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -162,6 +168,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RegPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CreditInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DebitInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

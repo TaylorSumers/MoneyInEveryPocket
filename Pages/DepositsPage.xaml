@@ -8,7 +8,7 @@
       d:DesignHeight="1700" d:DesignWidth="1600"
       Title="DepositsPage">
 
-    <ScrollViewer>
+    <ScrollViewer >
         <Grid Background="White" Height="1700">
 
             <Grid.RowDefinitions>
@@ -86,8 +86,8 @@
             <!--Credit section-->
             <TextBlock Text="Кредитные карты" FontSize="50" Foreground="DarkBlue" Margin="20,0" Grid.Row="2"/>
 
-            <ListView Name="LVDepos1" Grid.Row="3" BorderBrush="Transparent" 
-                      ScrollViewer.CanContentScroll="False"  MouseDoubleClick="LVDepos_MouseDoubleClick">
+            <ListView Name="LVCredits" Grid.Row="3" BorderBrush="Transparent" 
+                      ScrollViewer.CanContentScroll="False"  MouseDoubleClick="LVCredits_MouseDoubleClick">
 
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -109,37 +109,22 @@
                                     <RowDefinition Height="0.25*"/>
                                     <RowDefinition Height="0.2*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding DepositName}" FontSize="30" TextAlignment="Center" Margin="0,40"/>
+                                <TextBlock Text="{Binding CreditName}" FontSize="30" TextAlignment="Center" Margin="0,40"/>
                                 <TextBlock Grid.Row="1" TextAlignment="Center" Margin="0,10" FontSize="17">
-                                <Run Name="rRefillable" Text="Без пополнения"/><LineBreak/>
-                                <Run Name="rWithdrawable" Text="Без снятия"/><LineBreak/>
-                                <Run Name="rCapitalization" Text="Без капитализации"/>
+                                <Run Text="Кредитный лимит"/><LineBreak/>
+                                <Run Text="{Binding CreditLimit, StringFormat={}до {0:0,0} руб.}"/><LineBreak/>
                                 </TextBlock>
                                 <TextBlock Grid.Row="2" TextAlignment="Center" Margin="0,10" FontSize="15">
-                                <Run Text="Минимальный срок"/><LineBreak/>
-                                <Run Text="от"/>
-                                <Run Text="{Binding DepositMinTerm}"/>
-                                <Run Text="месяцев"/>
+                                <Run Text="Стоимость обслуживания"/><LineBreak/>
+                                <Run Text="{Binding CreditServiceCost, StringFormat={}{0:0} руб. в год}"/>
                                 <LineBreak/>
                                 </TextBlock>
                                 <TextBlock Grid.Row="3" TextAlignment="Center" Margin="0,10">
-                                <Run Text="{Binding DepositPercent, StringFormat={}{0:0}%}" FontSize="35" Foreground="DarkBlue" FontWeight="Bold"/>
-                                <Run Text=" годовых" Foreground="DarkBlue" FontSize="20"/>
+                                <Run Text="Ставка " Foreground="DarkBlue" FontSize="20"/>
+                                <Run Text="{Binding CreditPercent, StringFormat={}{0:0}%}" FontSize="35" Foreground="DarkBlue" FontWeight="Bold"/>
                                 </TextBlock>
                             </Grid>
                         </Border>
-
-                        <DataTemplate.Triggers>
-                            <DataTrigger Binding="{Binding DepositRefillable}" Value="true">
-                                <Setter TargetName="rRefillable" Property="Text" Value="Пополняемый"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding DepositWithdrawable}" Value="true">
-                                <Setter TargetName="rWithdrawable" Property="Text" Value="Есть возможность снятия"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding DepositCapitalization}" Value="true">
-                                <Setter TargetName="rCapitalization" Property="Text" Value="С капитализацией"/>
-                            </DataTrigger>
-                        </DataTemplate.Triggers>
 
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -149,8 +134,8 @@
             <!--Debit section-->
             <TextBlock Text="Дебетовые карты" FontSize="50" Foreground="DarkBlue" Margin="20,0" Grid.Row="4"/>
 
-            <ListView Name="LVDepos2" Grid.Row="5" BorderBrush="Transparent" 
-                      ScrollViewer.CanContentScroll="False"  MouseDoubleClick="LVDepos_MouseDoubleClick">
+            <ListView Name="LVDebit" Grid.Row="5" BorderBrush="Transparent" 
+                      ScrollViewer.CanContentScroll="False"  MouseDoubleClick="LVDebit_MouseDoubleClick">
 
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -172,37 +157,22 @@
                                     <RowDefinition Height="0.25*"/>
                                     <RowDefinition Height="0.2*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding DepositName}" FontSize="30" TextAlignment="Center" Margin="0,40"/>
+                                <TextBlock Text="{Binding DebitName}" FontSize="30" TextAlignment="Center" Margin="0,40"/>
                                 <TextBlock Grid.Row="1" TextAlignment="Center" Margin="0,10" FontSize="17">
-                                <Run Name="rRefillable" Text="Без пополнения"/><LineBreak/>
-                                <Run Name="rWithdrawable" Text="Без снятия"/><LineBreak/>
-                                <Run Name="rCapitalization" Text="Без капитализации"/>
+                                <Run Text="{Binding DebitBalancePercent, StringFormat={}{0:0}% годовых на остаток}"/><LineBreak/>
+                                <Run Text="по карте"/>
                                 </TextBlock>
                                 <TextBlock Grid.Row="2" TextAlignment="Center" Margin="0,10" FontSize="15">
-                                <Run Text="Минимальный срок"/><LineBreak/>
-                                <Run Text="от"/>
-                                <Run Text="{Binding DepositMinTerm}"/>
-                                <Run Text="месяцев"/>
+                                <Run Text="Стоимость обслуживания"/><LineBreak/>
+                                <Run Text="{Binding DebitServiceCost, StringFormat={}{0:0} руб. в год}"/>
                                 <LineBreak/>
                                 </TextBlock>
                                 <TextBlock Grid.Row="3" TextAlignment="Center" Margin="0,10">
-                                <Run Text="{Binding DepositPercent, StringFormat={}{0:0}%}" FontSize="35" Foreground="DarkBlue" FontWeight="Bold"/>
-                                <Run Text=" годовых" Foreground="DarkBlue" FontSize="20"/>
+                                <Run Text="Кэшбэк " Foreground="DarkBlue" FontSize="20"/>
+                                <Run Text="{Binding DebitCashback, StringFormat={}{0:0}%}" FontSize="35" Foreground="DarkBlue" FontWeight="Bold"/>
                                 </TextBlock>
                             </Grid>
                         </Border>
-
-                        <DataTemplate.Triggers>
-                            <DataTrigger Binding="{Binding DepositRefillable}" Value="true">
-                                <Setter TargetName="rRefillable" Property="Text" Value="Пополняемый"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding DepositWithdrawable}" Value="true">
-                                <Setter TargetName="rWithdrawable" Property="Text" Value="Есть возможность снятия"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding DepositCapitalization}" Value="true">
-                                <Setter TargetName="rCapitalization" Property="Text" Value="С капитализацией"/>
-                            </DataTrigger>
-                        </DataTemplate.Triggers>
 
                     </DataTemplate>
                 </ListView.ItemTemplate>

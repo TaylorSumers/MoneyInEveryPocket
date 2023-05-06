@@ -26,14 +26,25 @@ namespace MoneyInEveryPocket.Pages
         public DepositsPage()
         {
             InitializeComponent();
+
             LVDepos.ItemsSource = cont.Deposit.ToList();
-            LVDepos1.ItemsSource = cont.Deposit.ToList();
-            LVDepos2.ItemsSource = cont.Deposit.ToList();
+            LVCredits.ItemsSource = cont.Credit.ToList();
+            LVDebit.ItemsSource = cont.Debit.ToList();
         }
 
         private void LVDepos_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new DepositInfoWindow(LVDepos.SelectedItem as Deposit).ShowDialog();
+        }
+
+        private void LVCredits_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new CreditInfoWindow(LVCredits.SelectedItem as Credit).ShowDialog();
+        }
+
+        private void LVDebit_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new DebitInfoWindow(LVDebit.SelectedItem as Debit).ShowDialog();
         }
     }
 }
